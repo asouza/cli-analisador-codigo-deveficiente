@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
+import { stdout } from 'process';
 
 dotenv.config();
 
@@ -94,9 +95,17 @@ const main = async (): Promise<void> => {
         if (resultado.outputTokens !== undefined) {
             console.log(`Tokens de Saída: ${resultado.outputTokens.toLocaleString()}`);
         }
-
+        
         console.log();
         console.log('Análise concluída!');
+
+        const saida = {
+            finalizacoComSucesso:resultado.finalizacoComSucesso,
+            conteudo: resultado.conteudo
+        }
+
+        // Escreve a saída no stdout
+        process.stdout.write(JSON.stringify(saida));
 
     } catch (erro) {
         const mensagemErro = erro instanceof Error ? erro.message : 'Erro desconhecido';
