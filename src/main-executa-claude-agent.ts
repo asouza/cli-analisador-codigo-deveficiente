@@ -104,8 +104,10 @@ const main = async (): Promise<void> => {
             conteudo: resultado.conteudo
         }
 
-        // Escreve a saída no stdout
-        process.stdout.write(JSON.stringify(saida));
+        // Escreve a saída no arquivo resultado-analise.txt
+        const caminhoSaida = path.join(process.cwd(), 'resultado-analise.txt');
+        fs.writeFileSync(caminhoSaida, JSON.stringify(saida, null, 2), 'utf-8');
+        console.log(`✓ Saída JSON salva em: ${caminhoSaida}`);
 
     } catch (erro) {
         const mensagemErro = erro instanceof Error ? erro.message : 'Erro desconhecido';
