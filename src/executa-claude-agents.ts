@@ -21,6 +21,7 @@ export interface ResultadoAnalise {
     custoTotal?: number;
     inputTokens?: number;
     outputTokens?: number;
+    conteudo?: string;
 }
 
 /**
@@ -45,21 +46,21 @@ const agent = async (endereco: string, prompt: string, maximoConversas:number): 
             includePartialMessages: true
         };
 
-        let resultadoFinal;
+        let resultadoFinal;        
 
         // Executa a query do agente
         console.log('Executando análise com Claude Agent SDK...\n');
 
-        for await (const result of query({ prompt: prompt, options })) {            
-            // Captura resultado final            
-            if (result.type === 'result') {                
-                console.log('\n\nAnálise concluída com sucesso!');                
+        for await (const result of query({ prompt: prompt, options })) {
+            // Captura resultado final
+            if (result.type === 'result') {
+                console.log('\n\nAnálise concluída com sucesso!');
                 resultadoFinal = result;
-                console.log(resultadoFinal)        
+                console.log(resultadoFinal)
                 break;
             }
         }
-        
+
 
         if (!resultadoFinal) {
             throw new Error('Nenhum resultado foi retornado pela análise');
@@ -71,7 +72,8 @@ const agent = async (endereco: string, prompt: string, maximoConversas:number): 
             finalizacoComSucesso: !resultadoFinal.is_error,
             custoTotal: resultadoFinal.total_cost_usd,
             inputTokens: modelUsage?.inputTokens ?? modelUsage?.input_tokens,
-            outputTokens: modelUsage?.outputTokens ?? modelUsage?.output_tokens
+            outputTokens: modelUsage?.outputTokens ?? modelUsage?.output_tokens,
+            conteudo: !resultadoFinal.is_error ? (resultadoFinal as any).result : undefined
         };
 
     } catch (erro) {

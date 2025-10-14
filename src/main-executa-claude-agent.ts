@@ -68,6 +68,14 @@ const main = async (): Promise<void> => {
         // Executa o agente
         const resultado = await agent(caminhoRepositorio, prompt, maximoConversas);
 
+        // Salva o resultado em arquivo
+        if (resultado.conteudo) {
+            const caminhoResultado = path.join(process.cwd(), 'resultado-analise.md');
+            fs.writeFileSync(caminhoResultado, resultado.conteudo, 'utf-8');
+            console.log();
+            console.log(`✓ Resultado salvo em: ${caminhoResultado}`);
+        }
+
         console.log();
         console.log('='.repeat(80));
         console.log('RESUMO DA ANÁLISE');
