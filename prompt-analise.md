@@ -1,12 +1,14 @@
 ## Regras de Design para código Orientado a Objetos
 
 - Não retornamos nulo dentro das regras da aplicação.
-- Separamos as bordas externas do sistema do seu núcleo. Não ligamos parâmetros de requisição externa com objetos de domínio diretamente, assim como não serializamos objetos de domínio para respostas de API.
+- Separamos as bordas externas do sistema do seu núcleo. Métodos que representam endpoints não recebem parametros do tipo de domínio. Apenas de tipos criados especificamente para representar o payload. 
+- Os retornos de métodos que representam endpoins são objetos de classes criadas especificamente para isso. 
 - Usamos o construtor para criar o objeto no estado válido.
 - Só alteramos estado de referências que criamos. Não mexemos nos objetos alheios. A não ser que esse objeto seja criado explicitamente para isso.
 - Favorecemos a coesão através do encapsulamento.
 - Controllers precisam ser 100% coeses. Todos métodos devem usar todos atributos
 - Servies/UseCases precisam ser 100% coeses. Todos métodos devem usar todos atributos
+- Não devemos ter Serivce/UseCases que funcionam apenas como delegador para outra camada.
 - Priorize o uso do construtor no dto de entrada e saída tambem
 - Setters só existem para possibilitar alterações de valores ou para definição de valores opcionais. 
 - Classes de domínio devem depender apenas de outra classes de domínio. 
