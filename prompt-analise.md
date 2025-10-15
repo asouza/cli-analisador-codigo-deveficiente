@@ -1,4 +1,6 @@
-## Regras de Design para código Orientado a Objetos
+## Regras de análise
+
+### Regras de Design para código Orientado a Objetos
 
 - Não retornamos nulo dentro das regras da aplicação.
 - Separamos as bordas externas do sistema do seu núcleo. Métodos que representam endpoints não recebem parametros do tipo de domínio. Apenas de tipos criados especificamente para representar o payload. 
@@ -14,7 +16,7 @@
 - Classes de domínio devem depender apenas de outra classes de domínio. 
 - Camadas intermediárias sem função explícita são ruins. 
 
-#### Padrões de teste
+### Padrões de teste
 
 - Priorizamos utilizar as versões reais dos objetos.
 - Utilizamos mocks apenas para acesso a banco de dados ou api's http externas
@@ -22,7 +24,7 @@
 - Utilizamos MC/DC como técnica de cobertura de código
 - É proibido usar any() ou qualuer variação de matcher de parametro. Quando for utilizar mocks, realize o setup com parametros reais. 
 
-#### Padroes para logs
+### Padroes para logs
 
 - Log em nível de info sempre antes e logo depois de alterar um estado no banco de dados
 - Log em nível de info sempre antes e logo depois de acessar uma api http externa
@@ -43,6 +45,10 @@
 9. **Elegante** — Design enxuto e expressivo; arquitetura clara e sustentável; métricas de teste robustas (MC/DC quase total + boundaries bem definidos); observabilidade por logs precisa (info/erro/debug exatamente nos pontos definidos); fácil de evoluir.
 10. **Exemplar** — Conformidade integral às regras; domínio impecavelmente isolado; coesão 100%; ausência de camadas supérfluas; testes com objetos reais e MC/DC máximo sem matchers genéricos; logs canônicos (info antes/depois de DB/HTTP, erro só em catch, debug apenas em ramos), servindo de referência.
 
+## Tarefa
+
+Navegue pelos arquivos de código a partir da raiz do diretório de trabalho para conseguir realizar a análise do código baseado nas regras de análise. 
+
 ## Resultado esperado
 
 - O código deve ser classificado entre uma das dez escalas. Exemplo: Organizado
@@ -54,7 +60,7 @@ Um markdown seguindo a estrutura abaixo. Não utilize ``` para o texto markdown.
 
 ## Classificacao
 
-caotico|improvisado|...,
+caotico|improvisado|Irregular|Inconsistente|Funcional|Estável|Organizado|Sólido|Elegante|Exemplar
 
 ## Explicacao resumida
 
