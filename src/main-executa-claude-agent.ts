@@ -82,7 +82,7 @@ const main = async (): Promise<void> => {
         console.log('RESUMO DA ANÁLISE');
         console.log('='.repeat(80));
         console.log();
-        console.log(`Status: ${resultado.finalizacoComSucesso ? '✓ Sucesso' : '✗ Erro'}`);
+        console.log(`Status: ${resultado.finalizadoComSucesso ? '✓ Sucesso' : '✗ Erro'}`);
 
         if (resultado.custoTotal !== undefined) {
             console.log(`Custo Total: $${resultado.custoTotal.toFixed(4)}`);

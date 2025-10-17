@@ -17,7 +17,7 @@ interface Agents {
 }
 
 export interface ResultadoAnalise {
-    finalizacoComSucesso: boolean;
+    finalizadoComSucesso: boolean;
     custoTotal?: number;
     inputTokens?: number;
     outputTokens?: number;
@@ -67,13 +67,14 @@ const agent = async (endereco: string, prompt: string, maximoConversas:number): 
         }
 
         const modelUsage = resultadoFinal.modelUsage as any;
+        const finalizadoComSucesso = resultadoFinal.subtype === 'success';
 
         return {
-            finalizacoComSucesso: !resultadoFinal.is_error,
+            finalizadoComSucesso: finalizadoComSucesso,
             custoTotal: resultadoFinal.total_cost_usd,
             inputTokens: modelUsage?.inputTokens ?? modelUsage?.input_tokens,
             outputTokens: modelUsage?.outputTokens ?? modelUsage?.output_tokens,
-            conteudo: !resultadoFinal.is_error ? (resultadoFinal as any).result : undefined
+            conteudo: finalizadoComSucesso ? (resultadoFinal as any).result : resultadoFinal.subtype
         };
 
     } catch (erro) {
