@@ -127,7 +127,7 @@ const main = async (): Promise<void> => {
         console.log('Análise concluída!');
 
         const saida = {
-            finalizacoComSucesso:resultado.finalizadoComSucesso,
+            finalizadoComSucesso:resultado.finalizadoComSucesso,
             conteudo: resultado.conteudo
         }
 
