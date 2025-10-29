@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 import dotenv from 'dotenv';
 import { stdout } from 'process';
 import { INSTRUCOES_EXECUCAO } from './instrucoes-execucao.js';
+import promptAnaliseDevEficiente from './prompt-analise-deveficiente.js'
 
 dotenv.config();
 
@@ -55,20 +56,22 @@ const main = async (): Promise<void> => {
         // Carrega o prompt da URL pública
         console.log(`Buscando prompt de: ${urlPrompt}`);
 
-        let promptCliente: string;
-        try {
-            const response = await fetch(urlPrompt);
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status} ${response.statusText}`);
-            }
-            promptCliente = await response.text();
-            console.log('✓ Prompt carregado com sucesso');
-            console.log();
-        } catch (erro) {
-            const mensagem = erro instanceof Error ? erro.message : 'Erro desconhecido';
-            console.error(`Erro ao carregar prompt da URL: ${mensagem}`);
-            process.exit(1);
-        }
+        let promptCliente: string = promptAnaliseDevEficiente;
+        //o github tava bloqueando por scrapping... 
+
+        // try {
+        //     const response = await fetch(urlPrompt);
+        //     if (!response.ok) {
+        //         throw new Error(`HTTP ${response.status} ${response.statusText}`);
+        //     }
+        //     promptCliente = await response.text();
+        //     console.log('✓ Prompt carregado com sucesso');
+        //     console.log();
+        // } catch (erro) {
+        //     const mensagem = erro instanceof Error ? erro.message : 'Erro desconhecido';
+        //     console.error(`Erro ao carregar prompt da URL: ${mensagem}`);
+        //     process.exit(1);
+        // }
 
         // Carrega a API key
         const apiKeyAnthropic = process.env.ANTHROPIC_API_KEY;
